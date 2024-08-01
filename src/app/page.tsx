@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <button onClick={() => signIn()}>LOGIN</button>
-      <p>{JSON.stringify(session)}</p>
+      <p className="text-inverse">{JSON.stringify(session)}</p>
     </>
   );
 }
