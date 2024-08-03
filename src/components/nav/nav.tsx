@@ -70,11 +70,11 @@ const NavItem = (props: Composition) => {
   );
 };
 
-interface NavbarInterface {
+interface NavbarPropsInterface {
   externalNavData?: NavDataType;
 }
 
-export const Navbar = (props) => {
+export const Navbar = (props: NavbarPropsInterface) => {
   const { externalNavData } = props;
   const [navConfig, setNavConfig] = useState<NavDataType>([]);
 
