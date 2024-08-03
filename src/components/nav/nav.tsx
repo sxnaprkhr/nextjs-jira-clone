@@ -5,7 +5,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import NavAvatar from "./NavAvatar";
 import NavToggle from "./NavToggle";
-import navConfig from "@/lib/navData";
+// import navConfig from "@/lib/navData";
 import { NavDataType, NavGroupInterface } from "./nav.types";
 
 interface Composition {
