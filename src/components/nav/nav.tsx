@@ -5,8 +5,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import NavAvatar from "./NavAvatar";
 import NavToggle from "./NavToggle";
-// import navConfig from "@/lib/navData";
-import { NavDataType, NavGroupInterface } from "./nav.types";
+import { NavDataType } from "./nav.types";
 
 interface Composition {
   children: ReactNode;
@@ -71,7 +70,12 @@ const NavItem = (props: Composition) => {
   );
 };
 
-export const Navbar = () => {
+interface NavbarInterface {
+  externalNavData?: NavDataType;
+}
+
+export const Navbar = (props) => {
+  const { externalNavData } = props;
   const [navConfig, setNavConfig] = useState<NavDataType>([]);
 
   useEffect(() => {
@@ -81,8 +85,9 @@ export const Navbar = () => {
       setNavConfig(data.navData as NavDataType);
     };
 
-    fetchNavbarConfig();
-  }, []);
+    if (!externalNavData) fetchNavbarConfig();
+    else setNavConfig(externalNavData);
+  }, [externalNavData]);
 
   const navItemsMap = {
     logo: NavLogo,
