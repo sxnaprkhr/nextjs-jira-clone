@@ -21,6 +21,7 @@ const NavAvatar = () => {
         <button
           className="cursor-pointer text-inverse button-brand p-2 rounded-sm"
           onClick={() => signIn()}
+          data-testid="login_btn"
         >
           Login
         </button>
@@ -37,7 +38,10 @@ const NavAvatar = () => {
             data-testid="profile_picture"
             onClick={() => togglePopup(!showPopup)}
           />
-          <Avatar.Fallback className="animate-pulse skeleton w-full h-full" />
+          <Avatar.Fallback
+            className="animate-pulse skeleton w-full h-full"
+            data-testid="profile_shimmer"
+          />
         </Avatar.Root>
       )}
       {showPopup && (

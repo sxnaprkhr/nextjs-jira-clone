@@ -5,13 +5,12 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 const NavToggle = () => {
   const { setTheme, theme } = useTheme();
-
   return (
     <div className="text-white cursor-pointer mt-3 sm:mt-0">
-      {theme === "light" ? (
-        <SunIcon width={25} height={25} onClick={() => setTheme("dark")} />
-      ) : (
+      {theme === "dark" ? (
         <MoonIcon width={25} height={25} onClick={() => setTheme("light")} />
+      ) : (
+        <SunIcon width={25} height={25} onClick={() => setTheme("dark")} />
       )}
     </div>
   );

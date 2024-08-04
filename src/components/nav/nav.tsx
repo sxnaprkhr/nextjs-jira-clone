@@ -2,17 +2,20 @@
 import React, { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import customHooks from "@/hooks";
 import NavAvatar from "./NavAvatar";
 import NavToggle from "./NavToggle";
 import { NavDataType } from "./nav.types";
+import { useSession } from "next-auth/react";
 
 interface Composition {
   children: ReactNode;
+  authOnly?: Boolean;
 }
 
 const NavContainer = (props: Composition) => {
   const { children } = props;
+  const { useWindowDimensions } = customHooks;
   const { isDesktop } = useWindowDimensions();
 
   const [showNav, toggleNav] = useState(false);
@@ -27,6 +30,7 @@ const NavContainer = (props: Composition) => {
         <HamburgerMenuIcon
           height={30}
           width={30}
+          data-testid="hamburger"
           className="text-white ml-auto mr-3 my-3"
           onClick={() => toggleNav(!showNav)}
         />
@@ -61,7 +65,9 @@ const NavLogo = (props: Composition) => {
 };
 
 const NavItem = (props: Composition) => {
-  const { children } = props;
+  const { children, authOnly = false } = props;
+  const { status } = useSession();
+  if (authOnly && status !== "authenticated") return <></>;
 
   return (
     <div className="background-nav text-white sm:mr-3 p-2 border rounded font-semibold border-none">
@@ -104,7 +110,9 @@ export const Navbar = (props: NavbarPropsInterface) => {
             {navGroup?.items?.map((navItem) => {
               const Component = navItemsMap[navItem?.type] || <></>;
               return (
-                <Component key={navItem?.id}>{navItem?.content}</Component>
+                <Component key={navItem?.id} authOnly={navItem?.authOnly}>
+                  {navItem?.content}
+                </Component>
               );
             })}
           </NavGroup>
