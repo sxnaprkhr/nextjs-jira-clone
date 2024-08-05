@@ -4,6 +4,7 @@ import AuthProvider from "@/context/authProvider";
 import { Navbar } from "@/components/nav";
 import "./globals.css";
 import { ThemeProvider } from "@/context/themeProvider";
+import { Sidenav } from "@/components/sidenav/sidenav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         >
           <AuthProvider>
             <Navbar />
+            <Sidenav />
             {children}
           </AuthProvider>
         </ThemeProvider>
