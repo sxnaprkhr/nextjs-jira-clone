@@ -67,7 +67,7 @@ const NavLogo = (props: Composition) => {
 const NavItem = (props: Composition) => {
   const { children, authOnly = false } = props;
   const { status } = useSession();
-  if (authOnly && status !== "authenticated") return <></>;
+  if (authOnly && status === "unauthenticated") return <></>;
 
   return (
     <div className="background-nav text-white sm:mr-3 p-2 border rounded font-semibold border-none">
