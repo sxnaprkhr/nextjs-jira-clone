@@ -55,3 +55,18 @@ export async function fetchBoard(boardId: string, skip = 0, take = 10) {
     },
   };
 }
+
+export const updateTicketAtBackend = async (ticketsToUpdate: BoardTicket[]) => {
+  const transactions = ticketsToUpdate.map((ticket) => {
+    return prisma.boardTicket.update({
+      where: {
+        id: ticket.id,
+      },
+      data: {
+        boardColumnId: ticket.boardColumnId,
+        position: ticket.position,
+      },
+    });
+  });
+  await prisma.$transaction(transactions);
+};
